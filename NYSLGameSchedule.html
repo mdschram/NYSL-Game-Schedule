@@ -22,39 +22,45 @@
 
 <body>
     <div id="main">
-        <div class="games" v-if="page == 0">
-            <div class="top"><button class="btn btn-light">&lt;Back</button></div>
-            <div class="mainbuttons"><button class="btn btn-light">teams</button><button class="btn btn-light">stadiums</button><button class="btn btn-light">games</button></div>
-            <div class="info">
-                <div class="game" v-for="game in games.games">
-                    <div class="teams">
-                        <button class="teambutton btn btn-light">{{game.team1}}</button> VS.
-                        <button class="teambutton btn btn-light">{{game.team2}}</button></div>
-                    <div class="stadium">{{game.date}}
-                        <button class="stadiumbutton btn btn-light" v-on:click="page++">{{game.location}}</button>{{game.time}}
-                    </div>
+        <div class="top"><button class="btn btn-light">&lt;Back</button></div>
+        <div class="mainbuttons"><button class="btn btn-light">teams</button><button class="btn btn-light" v-on:click="pageToggler('locations')">stadiums</button><button class="btn btn-light" v-on:click="pageToggler('games')">games</button></div>
+        <div class="info" v-if="pageShow == 'games'">
+
+            <div class="game" v-for="game in selectedData.games">
+                <div class="teams">
+                    <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button> VS.
+                    <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
+                <div class="stadium">{{game.date}}
+                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>{{game.time}}
                 </div>
             </div>
             <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
         </div>
 
-        <div class="stadiums" v-if="page == 1">
-            <div class="top"><button class="btn btn-light" v-on:click="page--">Back</button></div>
-            <div class="mainbuttons"><button class="btn btn-light">teams</button><button class="btn btn-light">stadiums</button><button class="btn btn-light">games</button></div>
-            <div class="stadiuminfo">
-                AJ Katzenmaier 24 W. Walton St., Chicago, IL 60610
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.654213557417!2d-87.6312383846563!3d41.90029307922047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34e07f6bac3%3A0x68a82e5d59952c86!2s24+W+Walton+St%2C+Chicago%2C+IL+60610%2C+Verenigde+Staten!5e0!3m2!1snl!2snl!4v1526043373584" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+<div class="info" v-if="pageShow == 'locations'">
+
+            <div class="locations" v-for="location in locations">
+              {{location.name}}
             </div>
-            <div class="info">
-                <div class="game" v-for="game in games.games">
-                    <div class="teams">
-                        <button class="teambutton btn btn-light">{{game.team1}}</button> VS.
-                        <button class="teambutton btn btn-light">{{game.team2}}</button></div>
-                    <div class="stadium">{{game.date}}
-                        <button class="stadiumbutton btn btn-light">{{game.location}}</button>{{game.time}}
-                    </div>
+            <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
+        </div>
+
+
+        <div class="info" v-if="pageShow == 'location'">
+            <div class="stadiuminfo">{{showLocation}}
+
+            </div>
+
+
+            <div class="game" v-for="game in selectedData.games">
+                <div class="teams">
+                    <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button> VS.
+                    <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
+                <div class="stadium">{{game.date}}
+                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>{{game.time}}
                 </div>
             </div>
+
             <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
 
             <div class="teams"></div>
@@ -62,12 +68,53 @@
 
         </div>
 
+
+        <div class="info" v-if="pageShow == 'team'">
+            <div class="stadiuminfo">{{showTeam}} </div>
+
+
+            <div class="game" v-for="game in selectedData.games">
+                <div class="teams">
+                    <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button> VS.
+                    <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
+                <div class="stadium">{{game.date}}
+                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>{{game.time}}
+                </div>
+            </div>
+
+            <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
+
+
+
+
+        </div>
+
+
+        <div class="info" v-if="pageShow == 'teams'">
+
+            <div class="game" v-for="game in selectedData.games">
+                <div class="teams">
+                    <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button> VS.
+                    <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
+                <div class="stadium">{{game.date}}
+                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>{{game.time}}
+                </div>
+            </div>
+
+            <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
+        </div>
+
+
+
+
+
+
+
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <!--    <script src="data.js"></script>-->
     <script src="main.js"></script>
 </body>
 
