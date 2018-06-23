@@ -36,11 +36,7 @@ var main = new Vue({
                         this.selectedData.games.push(this.gameData.games[i])
                     }
                 }
-//                console.log(buttonName)
-//                console.log(this.pageShow)
-//                console.log(this.selectedData)
-            }
-            else if (this.teams.includes(buttonName)) {
+            } else if (this.teams.includes(buttonName)) {
                 this.selectedData = {
                     "games": []
                 }
@@ -51,15 +47,10 @@ var main = new Vue({
                         this.selectedData.games.push(this.gameData.games[i])
                     }
                 }
+            } else {
+                this.selectedData = this.gameData;
+                this.pageShow = buttonName
             }
-            else {this.selectedData = this.gameData;
-//                  console.log(this.selectedData)
-                  console.log("not in array")
-//                  console.log(buttonName)
-//                  console.log(this.locations)/
-                  console.log(this.pageShow)
-                this.showPage = buttonName}
-           
         },
         locationArray: function () {
             for (i = 0; i < this.gameData.games.length; i++) {
@@ -73,7 +64,11 @@ var main = new Vue({
                 if (!this.teams.includes(this.gameData.games[i].team1)) {
                     this.teams.push(this.gameData.games[i].team1)
                 }
+                if (!this.teams.includes(this.gameData.games[i].team2)) {
+                    this.teams.push(this.gameData.games[i].team2)
+                }
             }
+            this.teams.sort();
         }
     }
 })

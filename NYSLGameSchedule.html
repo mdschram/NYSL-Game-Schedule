@@ -23,9 +23,10 @@
 <body>
     <div id="main">
         <div class="top"><button class="btn btn-light">&lt;Back</button></div>
-        <div class="mainbuttons"><button class="btn btn-light">teams</button><button class="btn btn-light" v-on:click="pageToggler('locations')">stadiums</button><button class="btn btn-light" v-on:click="pageToggler('games')">games</button></div>
-        <div class="info" v-if="pageShow == 'games'">
+        <div class="mainbuttons"><button class="btn btn-light" v-on:click="pageToggler('teams')">Teams</button><button class="btn btn-light" v-on:click="pageToggler('locations')">Stadiums</button><button class="btn btn-light" v-on:click="pageToggler('games')">All Games</button></div>
 
+
+        <div class="info" v-if="pageShow == 'games'">
             <div class="game" v-for="game in selectedData.games">
                 <div class="teams">
                     <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button> VS.
@@ -34,24 +35,21 @@
                     <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>{{game.time}}
                 </div>
             </div>
-            <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
         </div>
 
-<div class="info" v-if="pageShow == 'locations'">
+        
 
-            <div class="locations" v-for="location in locations">
-              {{location.name}}
+        <div class="info" v-if="pageShow == 'locations'">
+            <div class="locations" v-for="location in locations"><button class="stadiumbutton btn btn-light" v-on:click="pageToggler(location)">
+                {{location}}</button>
             </div>
-            <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
+<!--            <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>-->
         </div>
 
 
         <div class="info" v-if="pageShow == 'location'">
             <div class="stadiuminfo">{{showLocation}}
-
             </div>
-
-
             <div class="game" v-for="game in selectedData.games">
                 <div class="teams">
                     <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button> VS.
@@ -60,19 +58,14 @@
                     <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>{{game.time}}
                 </div>
             </div>
-
-            <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
-
-            <div class="teams"></div>
-
-
+<!--            <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>-->
+<!--            <div class="teams"></div>-->
         </div>
+
 
 
         <div class="info" v-if="pageShow == 'team'">
             <div class="stadiuminfo">{{showTeam}} </div>
-
-
             <div class="game" v-for="game in selectedData.games">
                 <div class="teams">
                     <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button> VS.
@@ -81,30 +74,18 @@
                     <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>{{game.time}}
                 </div>
             </div>
-
-            <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
-
-
-
-
+<!--            <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>-->
         </div>
+
 
 
         <div class="info" v-if="pageShow == 'teams'">
-
-            <div class="game" v-for="game in selectedData.games">
-                <div class="teams">
-                    <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button> VS.
-                    <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
-                <div class="stadium">{{game.date}}
-                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>{{game.time}}
-                </div>
+           <div class="locations" v-for="team in teams"><button class="stadiumbutton btn btn-light" v-on:click="pageToggler(team)">
+                {{team}}</button>
             </div>
-
-            <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
         </div>
 
-
+<div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
 
 
 
