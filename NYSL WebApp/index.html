@@ -15,14 +15,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="" type="text/css">
+    <link rel="stylesheet" href="styles/NYSLwebapp.css" type="text/css">
 
     <title> NYSL </title>
 </head>
 
 <body>
     <div id="main">
-        <div class="top"><button class="btn btn-light">&lt;Back</button></div>
+        <div class="top"><button class="btn btn-light" v-on:click="pageToggler('back')">&lt;Back</button></div>
         <div class="mainbuttons"><button class="btn btn-light" v-on:click="pageToggler('teams')">Teams</button><button class="btn btn-light" v-on:click="pageToggler('locations')">Stadiums</button><button class="btn btn-light" v-on:click="pageToggler('games')">All Games</button></div>
 
 
@@ -31,16 +31,16 @@
                 <div class="teams">
                     <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button> VS.
                     <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
-                <div class="stadium">{{game.date}}
-                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>{{game.time}}
+                <div class="stadium"><div class="date">{{game.date}}</div>
+                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button><div class="time">{{game.time}}</div>
                 </div>
             </div>
         </div>
 
-
+        
 
         <div class="info" v-if="pageShow == 'locations'">
-            <div class="locations" v-for="location in locations"><button class="stadiumbutton btn btn-light" v-on:click="pageToggler(location)">
+            <div class="locations" v-for="location in locations"><button class="widebuttons stadiumbutton btn btn-light" v-on:click="pageToggler(location)">
                 {{location}}</button>
             </div>
         </div>
@@ -53,8 +53,8 @@
                 <div class="teams">
                     <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button> VS.
                     <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
-                <div class="stadium">{{game.date}}
-                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>{{game.time}}
+               <div class="stadium"><div class="date">{{game.date}}</div>
+                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button><div class="time">{{game.time}}</div>
                 </div>
             </div>
         </div>
@@ -67,20 +67,21 @@
                 <div class="teams">
                     <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button> VS.
                     <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
-                <div class="stadium">{{game.date}}
-                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>{{game.time}}
+                <div class="stadium"><div class="date">{{game.date}}</div>
+                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button><div class="time">{{game.time}}</div>
                 </div>
             </div>
         </div>
 
 
+
         <div class="info" v-if="pageShow == 'teams'">
-            <div class="locations" v-for="team in teams"><button class="stadiumbutton btn btn-light" v-on:click="pageToggler(team)">
+           <div class="locations" v-for="team in teams"><button class="widebuttons stadiumbutton btn btn-light" v-on:click="pageToggler(team)">
                 {{team}}</button>
             </div>
         </div>
 
-        <div class="bottom"><button class="stadiumbutton btn btn-light">Chat</button></div>
+<div class="bottom"><button class="chatbutton btn btn-light">Chat</button></div>
 
 
 
@@ -91,22 +92,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyAkwg2vR6377GRjW646L5jhVDniM_Ix8NE",
-            authDomain: "nysl-webapp-e0109.firebaseapp.com",
-            databaseURL: "https://nysl-webapp-e0109.firebaseio.com",
-            projectId: "nysl-webapp-e0109",
-            storageBucket: "nysl-webapp-e0109.appspot.com",
-            messagingSenderId: "532119046592"
-        };
-        firebase.initializeApp(config);
-
-    </script>
-    <script src="main.js"></script>
+      
+    <script src="scripts/main.js"></script>
 </body>
 
 </html>

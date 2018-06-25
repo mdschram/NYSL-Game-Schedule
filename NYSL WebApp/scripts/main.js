@@ -5,10 +5,13 @@ var main = new Vue({
         pageShow: "games",
         locations: [],
         showLocation: "",
+        showTeam: "",
         teams: [],
         selectedData: {
             "games": []
-        }
+        },
+        visitedPages: ["games"]
+
     },
     created: function () {
         this.fetch();
@@ -30,7 +33,8 @@ var main = new Vue({
                     "games": []
                 };
                 this.pageShow = "location";
-                this.showLocation = buttonName
+                this.showLocation = buttonName;
+                this.visitedPages.unshift(this.showLocation)
                 for (i = 0; i < this.gameData.games.length; i++) {
                     if (this.gameData.games[i].location == this.showLocation) {
                         this.selectedData.games.push(this.gameData.games[i])
@@ -41,15 +45,44 @@ var main = new Vue({
                     "games": []
                 }
                 this.pageShow = "team";
-                this.showTeam = buttonName
+                this.showTeam = buttonName;
+                this.visitedPages.unshift(this.showTeam);
                 for (i = 0; i < this.gameData.games.length; i++) {
                     if (this.gameData.games[i].team1 == this.showTeam || this.gameData.games[i].team2 == this.showTeam) {
                         this.selectedData.games.push(this.gameData.games[i])
                     }
+                };
+            } else if (buttonName == "back") {
+                this.visitedPages.shift();
+                if (this.locations.includes(this.visitedPages[0])) {
+                    this.selectedData = {
+                        "games": []
+                    };
+                    this.pageShow = "location";
+                    this.showLocation = this.visitedPages[0];
+                    for (i = 0; i < this.gameData.games.length; i++) {
+                        if (this.gameData.games[i].location == this.showLocation) {
+                            this.selectedData.games.push(this.gameData.games[i])
+                        }
+                    }
+                } else if (this.teams.includes(this.visitedPages[0])) {
+                    this.selectedData = {
+                        "games": []
+                    };
+                    this.pageShow = "team";
+                    this.showTeam = this.visitedPages[0];
+                    for (i = 0; i < this.gameData.games.length; i++) {
+                        if (this.gameData.games[i].team1 == this.showTeam || this.gameData.games[i].team2 == this.showTeam) {
+                            this.selectedData.games.push(this.gameData.games[i])
+                        }
+                    }
+                } else {
+                    this.pageShow = this.visitedPages[0]
                 }
             } else {
                 this.selectedData = this.gameData;
-                this.pageShow = buttonName
+                this.pageShow = buttonName;
+                this.visitedPages.unshift(this.pageShow)
             }
         },
         locationArray: function () {
