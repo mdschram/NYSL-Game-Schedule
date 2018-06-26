@@ -1,0 +1,347 @@
+@media screen and (orientation:portrait) {
+    // CSS applied when the device is in portrait mode
+    html,
+    body {
+        background-color: #569532;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+        background-image: url(/field.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .top {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        background-color: #569532;
+        width: 100%;
+    }
+
+    .backbutton {
+        position: absolute;
+        left: 19px;
+        top: 10px
+    }
+
+    .googlelogo {
+        width: 70px;
+        height: 70px;
+    }
+
+    img {
+        height: 50px;
+        width: 50px
+    }
+
+    .mainbuttons {
+        display: flex;
+        justify-content: space-around;
+        background-color: #569532;
+        width: 100%;
+        height: 50px;
+    }
+
+    .info {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        background-color: #569532;
+        width: 100%;
+        position: fixed;
+        top: 200px;
+        bottom: 55px;
+
+    }
+
+    .bottom {
+        position: fixed;
+        bottom: 0px;
+        display: flex;
+        justify-content: center;
+        background-color: #569532;
+        width: 100%;
+        height: 50px
+    }
+
+    #main {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+
+    .teambutton {
+        display: inline-block;
+        margin: 2px;
+        margin-bottom: 5px;
+        width: 45%;
+        border: 1px solid gray;
+    }
+
+    .stadiumbutton {
+        display: inline-block;
+        margin: 2px;
+        margin-bottom: 5px;
+        border: 1px solid gray;
+        width: 65%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .teams {
+        display: flex;
+        justify-content: space-between
+    }
+
+    .stadium {
+        display: flex;
+        justify-content: center
+    }
+
+    .game {
+        border-bottom: 1px solid black;
+
+        background-color: white
+    }
+
+    .locations {
+        background-color: white
+    }
+
+    .btn-light {
+        margin-left: 6px;
+        margin: 2px;
+        margin-bottom: 6px;
+
+    }
+
+    .widebuttons {
+        width: 99%;
+        margin-right: 20px;
+    }
+
+    .stadiuminfo {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #569532;
+        width: 100%;
+    }
+
+    .time {
+        width: 33%;
+        text-align: center
+    }
+
+    .date {
+        width: 33%;
+        text-align: center
+    }
+
+    p {
+        color: forestgreen;
+        margin-top: 10px;
+        margin-bottom: 3px;
+
+        font-weight: bold;
+    }
+
+    .black {
+        color: black;
+        margin-left: 8px;
+    }
+
+    a {
+        margin-left: 8px
+    }
+
+    .rightside {
+        margin-top: 10px;
+        margin-right: 10px
+    }
+
+    .succes {
+        background-color: greenyellow
+    }
+}
+
+@media screen and (orientation:landscape) {
+    html,
+    body {
+        background-color: #569532;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+        background-image: url(/field.jpg);
+        background-size: cover;
+        background-repeat: repeat;
+        width: 50%;
+        height: 100%;
+   
+    }
+
+    .top {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        background-color: #569532;
+        width: 100%;
+        height: 100%
+    }
+
+    .backbutton {
+        position: absolute;
+        left: 19px;
+        top: 10px
+    }
+
+    .googlelogo {
+        width: 70px;
+        height: 70px;
+    }
+
+    img {
+        height: 50px;
+        width: 50px
+    }
+
+    .mainbuttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        background-color: #569532;
+        width: 100%;
+        height: 100%;
+    }
+
+    .info {
+        margin-right: 10px;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        background-color: #569532;
+        width: 50%;
+        position: fixed;
+        top: 80px;
+        bottom: 5px;
+    }
+
+    .bottom {
+        position: fixed;
+        bottom: 0px;
+        display: flex;
+        justify-content: center;
+        background-color: #569532;
+        width: 48%;
+        height: 50px
+    }
+
+    #main {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+    }
+
+    .teambutton {
+        display: inline-block;
+        margin: 2px;
+        margin-bottom: 5px;
+        width: 45%;
+        border: 1px solid gray;
+    }
+
+    .stadiumbutton {
+        display: inline-block;
+        margin: 2px;
+        margin-bottom: 5px;
+        border: 1px solid gray;
+        width: 65%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .teams {
+        display: flex;
+        justify-content: space-between
+    }
+
+    .stadium {
+        display: flex;
+        justify-content: center
+    }
+
+    .game {
+        border-bottom: 1px solid black;
+
+        background-color: white
+    }
+
+    .locations {
+        background-color: white
+    }
+
+    .btn-light {
+        margin-left: 6px;
+        margin: 2px;
+        margin-bottom: 6px;
+
+    }
+
+    .widebuttons {
+        width: 99%;
+        margin-right: 20px;
+    }
+
+    .stadiuminfo {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #569532;
+        width: 50%;
+     
+    }
+
+    .time {
+        width: 33%;
+        text-align: center
+    }
+
+    .date {
+        width: 33%;
+        text-align: center
+    }
+
+    p {
+        color: forestgreen;
+        margin-top: 10px;
+        margin-bottom: 3px;
+
+        font-weight: bold;
+    }
+
+    .black {
+        color: black;
+        margin-left: 8px;
+    }
+
+    a {
+        margin-left: 8px
+    }
+
+    .rightside {
+        margin-top: 10px;
+        margin-right: 10px
+    }
+    
+
+    .succes {
+        background-color: greenyellow
+    }
+}
