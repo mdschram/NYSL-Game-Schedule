@@ -5,19 +5,61 @@
         background-color: #569532;
         margin: 0;
         padding: 0;
+        height: 100vh;
+        
     }
 
     .navbar {
+        position: fixed;
+        top: 0;
+        height: 120px;
+        width: 100%;
+        background-color: #569532;
+        background-image: url(/field.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+        .stadiuminfo {
+        position:fixed;
+        top: 120px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #569532;
+        width: 100%;
+        height: 50px
+    }
+    
+        .info {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        /*        background-color: #569532;*/
+        width: 100%;
+        position: fixed;
+        top: 220px;
+        bottom: 55px;
+    }
+    
+    .bottom {
+        position: fixed;
+        bottom: 0px;
+        display: flex;
+        justify-content: center;
+        /*        background-color: #569532;*/
+        width: 100%;
+        height: 50px;
         background-image: url(/field.jpg);
         background-size: cover;
         background-repeat: no-repeat;
     }
 
+
     .top {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        background-color: #569532;
+        /*        background-color: #569532;*/
         width: 100%;
     }
 
@@ -27,6 +69,11 @@
         top: 10px
     }
 
+
+    .smallFont {
+        font-size: 10px;
+        margin-top: 3px
+    }
     .googlelogo {
         width: 70px;
         height: 70px;
@@ -40,33 +87,25 @@
     .mainbuttons {
         display: flex;
         justify-content: space-around;
-        background-color: #569532;
+        /*        background-color: #569532;*/
         width: 100%;
         height: 50px;
     }
 
-    .info {
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        background-color: #569532;
-        width: 100%;
-        position: fixed;
-        top: 200px;
-        bottom: 55px;
-
+    .gameDate {
+        margin-top: 0px
+    }
+    .smallFont {
+        font-size: 10px;
+        margin-top: 3px
     }
 
-    .bottom {
-        position: fixed;
-        bottom: 0px;
-        display: flex;
-        justify-content: center;
-        background-color: #569532;
-        width: 100%;
-        height: 50px
-    }
 
+
+
+    
     #main {
+                background-color: #569532;
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -125,11 +164,14 @@
     }
 
     .stadiuminfo {
+        position:fixed;
+        top: 120px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         background-color: #569532;
         width: 100%;
+        height: 100px
     }
 
     .time {
@@ -141,6 +183,8 @@
         width: 33%;
         text-align: center
     }
+
+
 
     p {
         color: forestgreen;
@@ -165,32 +209,43 @@
     }
 
     .succes {
-        background-color: greenyellow
+        background-color: #569532
     }
+
+    /*
+    .active {
+        background-color: springgreen
+    }
+*/
 }
 
 @media screen and (orientation:landscape) {
     html,
     body {
-        background-color: #569532;
+/*        background-color: #569532;*/
         margin: 0;
         padding: 0;
+        background-image: url(/field.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 
     .navbar {
+        /*
         background-image: url(/field.jpg);
         background-size: cover;
         background-repeat: repeat;
-        width: 50%;
+*/
+        width: 30%;
         height: 100%;
-   
+
     }
 
     .top {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        background-color: #569532;
+        /*        background-color: #569532;*/
         width: 100%;
         height: 100%
     }
@@ -204,6 +259,7 @@
     .googlelogo {
         width: 70px;
         height: 70px;
+        
     }
 
     img {
@@ -215,20 +271,19 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        background-color: #569532;
+        /*        background-color: #569532;*/
         width: 100%;
         height: 100%;
     }
 
-    .info {
-        margin-right: 10px;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        background-color: #569532;
-        width: 50%;
-        position: fixed;
-        top: 80px;
-        bottom: 5px;
+
+
+    .gameDate {
+        margin-top: 0px
+    }
+    .smallFont {
+        font-size: 10px;
+        margin-top: 3px
     }
 
     .bottom {
@@ -236,9 +291,15 @@
         bottom: 0px;
         display: flex;
         justify-content: center;
-        background-color: #569532;
-        width: 48%;
-        height: 50px
+        /*        background-color: #569532;*/
+        width: 30%;
+        height: 50px;
+
+        /*
+        background-image: url(/field.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+*/
     }
 
     #main {
@@ -300,13 +361,30 @@
     }
 
     .stadiuminfo {
+        position: fixed;
+        top: 5px;
+        right: 5px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         background-color: #569532;
-        width: 50%;
-     
+        width: 69%;
+        height: 80px;
+        margin-top: 5px;
+        padding-right: 5px;
+}
+    
+        .info {
+        padding-right: 5px;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        width: 70%;
+        position: fixed;
+        top: 80px;
+        bottom: 5px;
+
     }
+
 
     .time {
         width: 33%;
@@ -336,12 +414,26 @@
     }
 
     .rightside {
-        margin-top: 10px;
-        margin-right: 10px
+        margin-right: 80px;
+        margin-top: 5px;
+        padding-bottom: 10px;
+        
     }
-    
+
 
     .succes {
-        background-color: greenyellow
+        background-color: #569532;
     }
+
+    .infoAndScroller {
+        width: 70%;
+        padding-right: 5px
+    }
+
+
+}
+
+
+.chatbutton {
+    margin-top: 5px;
 }

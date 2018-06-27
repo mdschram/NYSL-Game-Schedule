@@ -10,13 +10,12 @@
     <link rel="apple-touch-icon" sizes="120x120" href="Icon-60@2x.png">
     <link rel="apple-touch-icon" sizes="152x152" href="Icon-76@2x.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/NYSLwebapp.css" type="text/css">
-
     <title> NYSL </title>
 </head>
 
@@ -28,8 +27,6 @@
             </div>
             <div class="mainbuttons"><button class="btn btn-light" v-on:click="pageToggler('teams')" v-bind:class="{ succes: teamsButton}">Teams</button><button class="btn btn-light" v-on:click="pageToggler('locations')" v-bind:class="{ succes: stadiumsButton}">Stadiums</button><button class="btn btn-light" v-on:click="pageToggler('games')" v-bind:class="{ succes: gamesButton}">All Games</button></div>
         </div>
-
-
         <div class="infoAndScroller" v-if="pageShow == 'games'">
             <div class="stadiuminfo" v-if="pageShow == 'games'">
                 <div class="leftside">
@@ -38,9 +35,7 @@
                 </div>
                 <div class="rightside">
                 </div>
-
             </div>
-
             <div class="info">
                 <div class="game" v-for="game in selectedData.games">
                     <div class="teams">
@@ -49,51 +44,42 @@
                         <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
                     <div class="stadium">
                         <div class="date">
-                            <p>{{game.date.slice(0,5)}}</p>
+                           <p class="smallFont">Date:</p>
+                            <p class="gameDate">{{game.date.slice(0,5)}}</p>
                         </div>
                         <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>
                         <div class="time">
-                            <p>{{game.time}}</p>
+                           <p class="smallFont">Time:</p>
+                            <p class="gameDate">{{game.time}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
-
         <div class="infoAndScroller" v-if="pageShow == 'locations'">
             <div class="stadiuminfo" v-if="pageShow == 'locations'">
                 <div class="leftside">
-
                     <p class="black">All NYSL Stadiums</p>
                 </div>
                 <div class="rightside">
                 </div>
-
             </div>
-
             <div class="info">
                 <div class="locations" v-for="location in locations"><button class="widebuttons stadiumbutton btn btn-light" v-on:click="pageToggler(location)">
                 {{location}}</button>
                 </div>
             </div>
         </div>
-
-
-
         <div class="infoAndScroller" v-if="pageShow == 'location'">
             <div class="stadiuminfo" v-if="pageShow == 'location'">
                 <div class="leftside">
-                    <p class="black">{{showLocation}}</p>
+                    <p class="black">Location: {{showLocation}}</p>
                     <p class="black">Upcoming Games:</p>
                 </div>
                 <div class="rightside">
-                    <a :href="url"><img class="googlelogo" src="icons8-google-maps-50.png"></a></div>
-
+                    <a :href="url"><img class="googlelogo" src="icons8-googlemaps-100.png"></a></div>
             </div>
             <div class="info">
-
                 <div class="game" v-for="game in selectedData.games">
                     <div class="teams">
                         <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button>
@@ -101,11 +87,13 @@
                         <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
                     <div class="stadium">
                         <div class="date">
-                            <p>{{game.date.slice(0,5)}}</p>
+                           <p class="smallFont">Date:</p>
+                            <p class="gameDate">{{game.date.slice(0,5)}}</p>
                         </div>
                         <!--                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>-->
                         <div class="time">
-                            <p>{{game.time}}</p>
+                            <p class="smallFont">Time:</p>
+                            <p class="gameDate">{{game.time}}</p>
                         </div>
                     </div>
                 </div>
@@ -128,11 +116,13 @@
                         <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
                     <div class="stadium">
                         <div class="date">
-                            <p>{{game.date.slice(0,5)}}</p>
+                             <p class="smallFont">Date:</p>
+                            <p class="gameDate">{{game.date.slice(0,5)}}</p>
                         </div>
                         <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>
                         <div class="time">
-                            <p>{{game.time}}</p>
+                            <p class="smallFont">Time:</p>
+                            <p class="gameDate">{{game.time}}</p>
                         </div>
                     </div>
                 </div>
@@ -157,8 +147,6 @@
 
         </div>
 
-
-
         <div class="bottom"><button class="chatbutton btn btn-light">Chat</button></div>
 
     </div>
@@ -166,7 +154,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAkwg2vR6377GRjW646L5jhVDniM_Ix8NE",
+            authDomain: "nysl-webapp-e0109.firebaseapp.com",
+            databaseURL: "https://nysl-webapp-e0109.firebaseio.com",
+            projectId: "nysl-webapp-e0109",
+            storageBucket: "nysl-webapp-e0109.appspot.com",
+            messagingSenderId: "532119046592"
+        };
+        firebase.initializeApp(config);
 
+    </script>
     <script src="scripts/main.js"></script>
 </body>
 

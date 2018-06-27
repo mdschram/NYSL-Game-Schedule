@@ -25,7 +25,7 @@ var main = new Vue({
 
     methods: {
         fetch: function () {
-            fetch('https://api.myjson.com/bins/10bjj2')
+            fetch('https://api.myjson.com/bins/9m23q')
                 .then(r => r.json())
                 .then(json => {
                     this.gameData = json
