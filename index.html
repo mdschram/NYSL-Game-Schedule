@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" sizes="120x120" href="Icon-60@2x.png">
     <link rel="apple-touch-icon" sizes="152x152" href="Icon-76@2x.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -25,29 +25,30 @@
             <div class="top"><button class="backbutton btn btn-light" v-on:click="pageToggler('back')" v-if="visitedPages.length > 1">&lt;Back</button>
                 <div class="logo"><img src="nysl_logo.png"></div>
             </div>
-            <div class="mainbuttons"><button class="btn btn-light" v-on:click="pageToggler('teams')" v-bind:class="{ succes: teamsButton}">Teams</button><button class="btn btn-light" v-on:click="pageToggler('locations')" v-bind:class="{ succes: stadiumsButton}">Stadiums</button><button class="btn btn-light" v-on:click="pageToggler('games')" v-bind:class="{ succes: gamesButton}">All Games</button></div>
+            <div class="mainbuttons"><button class="btn btn-light" v-on:click="pageToggler('teams', 'forward')" v-bind:class="{ succes: teamsButton}">Teams</button><button class="btn btn-light" v-on:click="pageToggler('locations', 'forward')" v-bind:class="{ succes: stadiumsButton}">Stadiums</button><button class="btn btn-light" v-on:click="pageToggler('games', 'forward')" v-bind:class="{ succes: gamesButton}">All Games</button></div>
         </div>
-        <div class="infoAndScroller" v-if="pageShow == 'games'">
-            <div class="stadiuminfo" v-if="pageShow == 'games'">
+        <div class="infoAndScroller" v-if="showPage == 'games'">
+            <div class="stadiuminfo" v-if="showPage == 'games'">
                 <div class="leftside">
 
                     <p class="black">All NYSL Games</p>
                 </div>
                 <div class="rightside">
+                <img src="nysl_logo.png">
                 </div>
             </div>
             <div class="info">
                 <div class="game" v-for="game in selectedData.games">
                     <div class="teams">
-                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button>
+                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1, 'forward')">{{game.team1}}</button>
                         <p>VS.</p>
-                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
+                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2, 'forward')">{{game.team2}}</button></div>
                     <div class="stadium">
                         <div class="date">
                            <p class="smallFont">Date:</p>
                             <p class="gameDate">{{game.date.slice(0,5)}}</p>
                         </div>
-                        <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>
+                        <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location, 'forward')"><p class="smallFont">Location:</p>{{game.location}}</button>
                         <div class="time">
                            <p class="smallFont">Time:</p>
                             <p class="gameDate">{{game.time}}</p>
@@ -56,41 +57,43 @@
                 </div>
             </div>
         </div>
-        <div class="infoAndScroller" v-if="pageShow == 'locations'">
-            <div class="stadiuminfo" v-if="pageShow == 'locations'">
+        <div class="infoAndScroller" v-if="showPage == 'locations'">
+            <div class="stadiuminfo" v-if="showPage == 'locations'">
                 <div class="leftside">
                     <p class="black">All NYSL Stadiums</p>
                 </div>
                 <div class="rightside">
+                <img src="nysl_logo.png">
                 </div>
             </div>
             <div class="info">
-                <div class="locations" v-for="location in locations"><button class="widebuttons stadiumbutton btn btn-light" v-on:click="pageToggler(location)">
+                <div class="locations" v-for="location in locations"><button class="widebuttons stadiumbutton btn btn-light" v-on:click="pageToggler(location, 'forward')">
                 {{location}}</button>
                 </div>
             </div>
         </div>
-        <div class="infoAndScroller" v-if="pageShow == 'location'">
-            <div class="stadiuminfo" v-if="pageShow == 'location'">
+        <div class="infoAndScroller" v-if="showPage == 'location'">
+            <div class="stadiuminfo" v-if="showPage == 'location'">
                 <div class="leftside">
-                    <p class="black">Location: {{showLocation}}</p>
-                    <p class="black">Upcoming Games:</p>
-                </div>
+                    <p class="stadiumBlack">Location: {{showLocation}}</p>
+                    <div class="addressPortrait"> {{address}}</div>
+                    <p class="stadiumBlack">Upcoming Games:</p>
+                    </div>
+                    <p class="addressLandscape">{{address}}</p>
                 <div class="rightside">
                     <a :href="url"><img class="googlelogo" src="icons8-googlemaps-100.png"></a></div>
             </div>
             <div class="info">
                 <div class="game" v-for="game in selectedData.games">
                     <div class="teams">
-                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button>
+                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1, 'forward')">{{game.team1}}</button>
                         <p> VS.</p>
-                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
+                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2, 'forward')">{{game.team2}}</button></div>
                     <div class="stadium">
                         <div class="date">
                            <p class="smallFont">Date:</p>
                             <p class="gameDate">{{game.date.slice(0,5)}}</p>
                         </div>
-                        <!--                    <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>-->
                         <div class="time">
                             <p class="smallFont">Time:</p>
                             <p class="gameDate">{{game.time}}</p>
@@ -100,26 +103,29 @@
             </div>
         </div>
 
-        <div class="infoAndScroller" v-if="pageShow == 'team'">
-            <div class="stadiuminfo" v-if="pageShow == 'team'">
+        <div class="infoAndScroller" v-if="showPage == 'team'">
+            <div class="stadiuminfo" v-if="showPage == 'team'">
                 <div class="leftside">
                     <p class="black">{{showTeam}} Team Page</p>
                     <p class="black">Upcoming Games:</p>
+                </div>
+                <div class="rightside">
+                    <button class="logoButton">{{showTeam}}</button>
                 </div>
             </div>
             <div class="info">
 
                 <div class="game" v-for="game in selectedData.games">
                     <div class="teams">
-                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1)">{{game.team1}}</button>
+                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team1, 'forward')">{{game.team1}}</button>
                         <p> VS.</p>
-                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2)">{{game.team2}}</button></div>
+                        <button class="teambutton btn btn-light" v-on:click="pageToggler(game.team2, 'forward')">{{game.team2}}</button></div>
                     <div class="stadium">
                         <div class="date">
                              <p class="smallFont">Date:</p>
                             <p class="gameDate">{{game.date.slice(0,5)}}</p>
                         </div>
-                        <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location)">{{game.location}}</button>
+                        <button class="stadiumbutton btn btn-light" v-on:click="pageToggler(game.location, 'forward')"><p class="smallFont">Location:</p>{{game.location}}</button>
                         <div class="time">
                             <p class="smallFont">Time:</p>
                             <p class="gameDate">{{game.time}}</p>
@@ -130,17 +136,20 @@
         </div>
 
 
-        <div class="infoAndScroller" v-if="pageShow == 'teams'">
+        <div class="infoAndScroller" v-if="showPage == 'teams'">
 
-            <div class="stadiuminfo" v-if="pageShow == 'teams'">
+            <div class="stadiuminfo" v-if="showPage == 'teams'">
                 <div class="leftside">
 
                     <p class="black">All NYSL Teams</p>
                 </div>
+                <div class="rightside">
+                <img src="nysl_logo.png">
+                </div>
             </div>
 
             <div class="info">
-                <div class="locations" v-for="team in teams"><button class="widebuttons stadiumbutton btn btn-light" v-on:click="pageToggler(team)">
+                <div class="locations" v-for="team in teams"><button class="widebuttons stadiumbutton btn btn-light" v-on:click="pageToggler(team, 'forward')">
                 {{team}}</button>
                 </div>
             </div>

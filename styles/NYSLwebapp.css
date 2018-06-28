@@ -1,3 +1,101 @@
+.chatbutton {
+    width: 100px
+}
+
+.succes {
+    background-color: #569532;
+}
+
+a {
+    margin-left: 8px
+}
+
+.time {
+    width: 33%;
+    text-align: center
+}
+
+.date {
+    width: 33%;
+    text-align: center
+}
+
+p {
+    color: forestgreen;
+    margin-top: 10px;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.black {
+    color: black;
+    margin-left: 8px;
+    margin-top: 10px;
+}
+
+.teambutton {
+    display: inline-block;
+    margin: 2px;
+    margin-bottom: 5px;
+    width: 45%;
+    border: 1px solid gray;
+}
+
+.stadiumbutton {
+    display: inline-block;
+    margin: 2px;
+    margin-bottom: 5px;
+    border: 1px solid gray;
+    width: 65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 4px 10px;
+}
+
+.teams {
+    display: flex;
+    justify-content: space-between
+}
+
+.stadium {
+    display: flex;
+    justify-content: center
+}
+
+.game {
+    border-bottom: 1px solid black;
+    background-color: white
+}
+
+.locations {
+    background-color: white
+}
+
+.btn-light {
+    margin-left: 6px;
+    margin: 2px;
+    margin-bottom: 6px;
+}
+
+.widebuttons {
+    width: 90%;
+    height: 50px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.gameDate {
+    margin-top: 0px;
+    display: inline-block
+}
+
+.smallFont {
+    font-size: 10px;
+    margin: 0px;
+    padding-bottom: 0px
+}
+
 @media screen and (orientation:portrait) {
     // CSS applied when the device is in portrait mode
     html,
@@ -6,7 +104,25 @@
         margin: 0;
         padding: 0;
         height: 100vh;
-        
+    }
+
+    .logoButton {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 2px 2px;
+        border-radius: 50%;
+        border: 1px solid black;
+    }
+
+    .rightside img {
+        width: 60px;
+        height: 60px;
     }
 
     .navbar {
@@ -19,9 +135,9 @@
         background-size: cover;
         background-repeat: no-repeat;
     }
-    
-        .stadiuminfo {
-        position:fixed;
+
+    .stadiuminfo {
+        position: fixed;
         top: 120px;
         display: flex;
         flex-direction: row;
@@ -30,36 +146,52 @@
         width: 100%;
         height: 50px
     }
-    
-        .info {
+
+    .info {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
-        /*        background-color: #569532;*/
         width: 100%;
         position: fixed;
-        top: 220px;
-        bottom: 55px;
+        top: 200px;
+        bottom: 50px;
     }
-    
+
+    .addressPortrait {
+        display: block;
+        font-size: 10.5px;
+        color: black;
+        margin: 0;
+        margin-left: 8px
+    }
+
+    .stadiumBlack {
+        color: black;
+        margin-left: 8px;
+        margin-top: 2px;
+    }
+
+    .addressLandscape {
+        display: none
+    }
+
     .bottom {
         position: fixed;
         bottom: 0px;
         display: flex;
         justify-content: center;
-        /*        background-color: #569532;*/
         width: 100%;
         height: 50px;
         background-image: url(/field.jpg);
         background-size: cover;
         background-repeat: no-repeat;
+        padding-top: 5px
     }
-
 
     .top {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        /*        background-color: #569532;*/
+
         width: 100%;
     }
 
@@ -69,12 +201,7 @@
         top: 10px
     }
 
-
-    .smallFont {
-        font-size: 10px;
-        margin-top: 3px
-    }
-    .googlelogo {
+    img.googlelogo {
         width: 70px;
         height: 70px;
     }
@@ -87,110 +214,33 @@
     .mainbuttons {
         display: flex;
         justify-content: space-around;
-        /*        background-color: #569532;*/
         width: 100%;
         height: 50px;
     }
 
-    .gameDate {
-        margin-top: 0px
-    }
-    .smallFont {
-        font-size: 10px;
-        margin-top: 3px
-    }
-
-
-
-
-    
     #main {
-                background-color: #569532;
+        background-color: #569532;
         display: flex;
         flex-direction: column;
         width: 100%;
         height: 100%;
     }
 
-    .teambutton {
-        display: inline-block;
-        margin: 2px;
-        margin-bottom: 5px;
-        width: 45%;
-        border: 1px solid gray;
-    }
-
-    .stadiumbutton {
-        display: inline-block;
-        margin: 2px;
-        margin-bottom: 5px;
-        border: 1px solid gray;
-        width: 65%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .teams {
-        display: flex;
-        justify-content: space-between
-    }
-
-    .stadium {
-        display: flex;
-        justify-content: center
-    }
-
-    .game {
-        border-bottom: 1px solid black;
-
-        background-color: white
-    }
-
-    .locations {
-        background-color: white
-    }
-
-    .btn-light {
-        margin-left: 6px;
-        margin: 2px;
-        margin-bottom: 6px;
-
-    }
-
-    .widebuttons {
-        width: 99%;
-        margin-right: 20px;
-    }
-
     .stadiuminfo {
-        position:fixed;
+        position: fixed;
         top: 120px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         background-color: #569532;
         width: 100%;
-        height: 100px
+        height: 80px
     }
-
-    .time {
-        width: 33%;
-        text-align: center
-    }
-
-    .date {
-        width: 33%;
-        text-align: center
-    }
-
-
 
     p {
         color: forestgreen;
         margin-top: 10px;
         margin-bottom: 3px;
-
         font-weight: bold;
     }
 
@@ -199,53 +249,51 @@
         margin-left: 8px;
     }
 
-    a {
-        margin-left: 8px
-    }
-
     .rightside {
         margin-top: 10px;
-        margin-right: 10px
+        margin-right: 10px;
+        margin-bottom: 10px;
     }
-
-    .succes {
-        background-color: #569532
-    }
-
-    /*
-    .active {
-        background-color: springgreen
-    }
-*/
 }
 
 @media screen and (orientation:landscape) {
     html,
     body {
-/*        background-color: #569532;*/
         margin: 0;
         padding: 0;
         background-image: url(/field.jpg);
         background-size: cover;
         background-repeat: no-repeat;
+
+    }
+
+    .logoButton {
+        background-color: #4CAF50;
+        border: 1px solid black;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        border-radius: 50%;
+    }
+
+    .rightside img {
+        width: 60px;
+        height: 60px;
     }
 
     .navbar {
-        /*
-        background-image: url(/field.jpg);
-        background-size: cover;
-        background-repeat: repeat;
-*/
         width: 30%;
         height: 100%;
-
     }
 
     .top {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        /*        background-color: #569532;*/
         width: 100%;
         height: 100%
     }
@@ -259,7 +307,6 @@
     .googlelogo {
         width: 70px;
         height: 70px;
-        
     }
 
     img {
@@ -267,23 +314,35 @@
         width: 50px
     }
 
+    .stadiumBlack {
+        font-size: 12px;
+        color: black;
+        margin-left: 8px;
+        margin-top: 7px;
+    }
+
+
+    .addressLandscape {
+        width: 100px;
+        display: block;
+        font-size: 11px;
+        color: black;
+        margin: 0;
+        margin-left: 8px;
+        font-weight: normal;
+        margin-top: 10px
+    }
+
+    .addressPortrait {
+        display: none
+    }
+
     .mainbuttons {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        /*        background-color: #569532;*/
         width: 100%;
         height: 100%;
-    }
-
-
-
-    .gameDate {
-        margin-top: 0px
-    }
-    .smallFont {
-        font-size: 10px;
-        margin-top: 3px
     }
 
     .bottom {
@@ -291,15 +350,8 @@
         bottom: 0px;
         display: flex;
         justify-content: center;
-        /*        background-color: #569532;*/
         width: 30%;
         height: 50px;
-
-        /*
-        background-image: url(/field.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-*/
     }
 
     #main {
@@ -307,57 +359,6 @@
         flex-direction: row;
         width: 100%;
         height: 100%;
-    }
-
-    .teambutton {
-        display: inline-block;
-        margin: 2px;
-        margin-bottom: 5px;
-        width: 45%;
-        border: 1px solid gray;
-    }
-
-    .stadiumbutton {
-        display: inline-block;
-        margin: 2px;
-        margin-bottom: 5px;
-        border: 1px solid gray;
-        width: 65%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .teams {
-        display: flex;
-        justify-content: space-between
-    }
-
-    .stadium {
-        display: flex;
-        justify-content: center
-    }
-
-    .game {
-        border-bottom: 1px solid black;
-
-        background-color: white
-    }
-
-    .locations {
-        background-color: white
-    }
-
-    .btn-light {
-        margin-left: 6px;
-        margin: 2px;
-        margin-bottom: 6px;
-
-    }
-
-    .widebuttons {
-        width: 99%;
-        margin-right: 20px;
     }
 
     .stadiuminfo {
@@ -372,9 +373,9 @@
         height: 80px;
         margin-top: 5px;
         padding-right: 5px;
-}
-    
-        .info {
+    }
+
+    .info {
         padding-right: 5px;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
@@ -385,55 +386,15 @@
 
     }
 
-
-    .time {
-        width: 33%;
-        text-align: center
-    }
-
-    .date {
-        width: 33%;
-        text-align: center
-    }
-
-    p {
-        color: forestgreen;
-        margin-top: 10px;
-        margin-bottom: 3px;
-
-        font-weight: bold;
-    }
-
-    .black {
-        color: black;
-        margin-left: 8px;
-    }
-
-    a {
-        margin-left: 8px
-    }
-
     .rightside {
-        margin-right: 80px;
+        margin-right: 10px;
         margin-top: 5px;
         padding-bottom: 10px;
-        
-    }
-
-
-    .succes {
-        background-color: #569532;
     }
 
     .infoAndScroller {
         width: 70%;
-        padding-right: 5px
+        padding-right: 5px;
+
     }
-
-
-}
-
-
-.chatbutton {
-    margin-top: 5px;
 }
