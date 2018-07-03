@@ -16,24 +16,29 @@ var main = new Vue({
         gamesButton: true,
         teamsButton: false,
         stadiumsButton: false,
+        accessStatus: "Log in",
+        messages: {}
     },
     created: function () {
         this.fetch();
+
     },
     methods: {
         fetch: function () {
-            fetch('https://api.myjson.com/bins/w5c4e')
+            fetch('https://api.myjson.com/bins/m10dq')
                 .then(r => r.json())
                 .then(json => {
                     this.gameData = json
                     this.locationArray()
                     this.teamsArray()
                     this.selectedData = this.gameData
+
                 })
         },
         pageToggler: function (buttonName, direction) {
-            console.log(this.showPage)
-            console.log(this.visitedPages)
+            if (this.showPage == 'chatroom') {
+                posts.innerHTML = ""
+            };
             this.gamesButton = false;
             this.teamsButton = false;
             this.stadiumsButton = false;
@@ -59,7 +64,6 @@ var main = new Vue({
                         this.url = this.gameData.locations[i].url
                     }
                 }
-                console.log(this.address)
             } else
             if (this.teams.includes(buttonName)) {
                 this.selectedData = {
@@ -97,6 +101,10 @@ var main = new Vue({
                 if (this.showPage == "teams") {
                     this.teamsButton = true
                 }
+
+                if (this.showPage == "Log out") {
+                    this.logout()
+                }
             }
         },
         locationArray: function () {
@@ -116,6 +124,115 @@ var main = new Vue({
                 }
             }
             this.teams.sort();
+        },
+        createNewUser: function () {
+            this.showPage = "Create Account";
+            var email = document.getElementById("email").value
+            var password = document.getElementById("password").value
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // ...
+                })
+                .then(function (user) {
+                    var user = firebase.auth().currentUser;
+                    user.updateProfile({
+                        displayName: document.getElementById("name").value
+                    });
+                }).catch(function (error) {
+                    console.log(error);
+                })
+            this.getPosts()
+        },
+        login: function () {
+            var email = document.getElementById("email").value
+            var password = document.getElementById("password").value
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    if (errorCode === 'auth/wrong-password') {
+                        alert('Wrong password.');
+                    } else {
+                        alert(errorMessage);
+                    }
+                    console.log(error);
+                })
+                .then(function () {
+                    console.log(firebase.Promise)
+                    main.accessStatus = "Log out"
+                    main.showPage = 'chatroom';
+                    main.getPosts()
+                })
+
+        },
+        loginGoogle: function () {
+
+            // https://firebase.google.com/docs/auth/web/google-signin
+
+            // Provider
+            var provider = new firebase.auth.GoogleAuthProvider();
+
+            // How to Log In
+            firebase.auth().signInWithPopup(provider)
+            //            this.accessStatus = "Log out"
+            this.showPage = 'chatroom'
+            this.accessStatus = "Log out"
+
+            this.getPosts()
+        },
+        logout: function () {
+            firebase.auth().signOut().then(function () {
+                // Sign-out successful.
+            }).catch(function (error) {
+                // An error happened.
+            })
+            this.showPage = "Log in"
+            this.accessStatus = "Log in"
+        },
+        writeNewPost: function () {
+
+            // https://firebase.google.com/docs/database/web/read-and-write
+
+            // Values
+            var text = document.getElementById("textInput").value;
+            var userName = firebase.auth().currentUser.displayName;
+
+
+            // A post entry
+
+            var post = {
+                name: userName,
+                body: text
+            };
+
+            // Get a key for a new Post.
+            var newPostKey = firebase.database().ref().child('NYSLchatroom').push().key;
+
+            //Write data
+            var updates = {};
+            updates[newPostKey] = post;
+            document.getElementById("textInput").value = ""
+            return firebase.database().ref('NYSLchatroom').update(updates);
+        },
+        getPosts: function () {
+            firebase.database().ref('NYSLchatroom').on('value', function (data) {
+                main.messages = data.val();
+
+            })
+            console.log("getting posts");
+            var posts = document.getElementById("posts");
+            posts.scrollTop = posts.scrollHeight;
+        },
+        determineUser: function (messageName) {
+            var userName = firebase.auth().currentUser.displayName;
+            if (userName == messageName) {
+                return "rightmessage"
+            } else {
+                return "leftmessage"
+            }
+
         }
     }
 })
