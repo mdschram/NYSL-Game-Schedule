@@ -22,7 +22,7 @@
 <body>
     <div id="main">
         <div class="navbar">
-            <div class="top"><button class="backbutton btn btn-light" v-on:click="pageToggler('back')" v-if="visitedPages.length > 1">&lt;Back</button>
+            <div class="top"><button class="backbutton btn btn-light" v-on:click="pageToggler('back')" v-if="visitedPages.length > 2">&lt;Back</button>
                 <div class="logo"><img src="nysl_logo.png"></div>
             </div>
             <div class="mainbuttons"><button class="btn btn-light" v-on:click="pageToggler('teams', 'forward')" v-bind:class="{ succes: teamsButton}">Teams</button><button class="btn btn-light" v-on:click="pageToggler('locations', 'forward')" v-bind:class="{ succes: stadiumsButton}">Stadiums</button><button class="btn btn-light" v-on:click="pageToggler('games', 'forward')" v-bind:class="{ succes: gamesButton}">All Games</button></div>
@@ -110,7 +110,7 @@
                     <p class="black">Upcoming Games:</p>
                 </div>
                 <div class="rightside">
-                       <button class="btn btn-light" v-if="accessStatus == 'Log out'" v-on:click="showPage = 'chatroom'; getPosts(); console.log(1)">Chat</button>
+                    <button class="btn btn-light" v-if="accessStatus == 'Log out'" v-on:click="pageToggler('chatroom', 'forward')">Chat</button>
                     <button class="logoButton">{{showTeam}}</button>
                 </div>
             </div>
@@ -162,19 +162,19 @@
             </div>
             <div class="info">
                 <div class="advice">
-                    <input id="email" class="input form-control" type="text" placeholder="Email..." >
+                    <input id="email" class="input form-control" type="text" placeholder="Email...">
                     <input id="password" class="input form-control" type="password" placeholder="Password...">
-                     <button id="login" class="button loginbutton btn btn-light" v-on:click="login">Login</button>
+                    <button id="login" class="button loginbutton btn btn-light" v-on:click="login">Login</button>
 
                     <a id="login" class="googlelogin" v-on:click="loginGoogle">or login with <img src="googlelogo.png"></a>
-                    
-                   <div>or <button id="login" class="button loginbutton btn btn-light" v-on:click="showPage = 'Create Account'">Create account</button></div> 
+
+                    <div>or <button id="login" class="button loginbutton btn btn-light" v-on:click="showPage = 'Create Account'">Create account</button></div>
                 </div>
 
             </div>
         </div>
-        
-            <div class="infoAndScroller" v-if="showPage == 'Create Account'">
+
+        <div class="infoAndScroller" v-if="showPage == 'Create Account'">
             <div class="stadiuminfo" v-if="showPage == 'Create Account'">
                 <div class="leftside">
                     <p class="black">Please login</p>
@@ -185,23 +185,19 @@
             </div>
             <div class="info">
                 <div class="advice">
-                    <input id="name" class="input form-control" type="text" placeholder="Name" >
-                    <input id="email" class="input form-control" type="text" placeholder="Email" >
+                    <input id="name" class="input form-control" type="text" placeholder="Name">
+                    <input id="email" class="input form-control" type="text" placeholder="Email">
                     <input id="password" class="input form-control" type="password" placeholder="Password">
                     <button id="login" class="button loginbutton btn btn-light" v-on:click="createNewUser">Create account</button>
-                    
+
                 </div>
-                
-                
-
-
             </div>
         </div>
 
-        <div class="infoAndScroller" v-if="showPage == 'chatroom'">
-            <div class="stadiuminfo" v-if="showPage == 'chatroom'">
+        <div class="infoAndScroller" v-show="showPage == 'chatroom'">
+            <div class="stadiuminfo" v-show="showPage == 'chatroom'">
                 <div class="leftside">
-                    <p class="black">Chat</p>
+                    <p class="black">Teamchat</p>
                 </div>
                 <div class="rightside">
                     <img src="nysl_logo.png">
@@ -209,27 +205,14 @@
             </div>
             <div class="info">
                 <div id="posts" class="box">
-                   <div class="message" v-for="value in messages" v-bind:class="determineUser(value.name)">
-                       <div class="textandname">
-                           <div class="name">{{value.name}}</div>
-                            <div class="userText">{{value.body}}</div>
-                           
-                           
-                           
-                       </div>
-                       
-                       
-                   </div>
-                    
+                 
                 </div>
-
                 <div class="inputs">
-                    <input id="textInput" class="input" type="text" placeholder="Your message..." @keyup.enter="writeNewPost">
-                    <button id="create-post" class="button loginbutton btn btn-light" @click="writeNewPost" >Send</button>
+                    <input id="textInput" class="input" type="text" placeholder="Your message...">
+                    <button id="create-post" class="button loginbutton btn btn-light" @click="writeNewPost(showTeam)">Send</button>
                 </div>
             </div>
         </div>
-
 
         <div class="bottom"><button class="chatbutton btn btn-light" v-on:click="pageToggler(accessStatus, 'forward')">{{accessStatus}}</button></div>
 

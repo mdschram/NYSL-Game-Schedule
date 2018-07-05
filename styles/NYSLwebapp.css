@@ -6,67 +6,7 @@
     background-color: #569532;
 }
 
-.leftmessage {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
 
-    margin: 5px;
-}
-
-.rightmessage {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin: 5px;
-    margin-bottom: 7px
-}
-
-.rightmessage .textandname {
-    display: inline-block;
-    background-color: deepskyblue;
-    padding: 5px;
-    border-radius: 8px;
-    box-shadow: 5px 5px 3px grey
-}
-
-.leftmessage .textandname {
-    display: inline-block;
-    background-color: orange;
-    padding: 5px;
-    border-radius: 8px;
-    box-shadow: 5px 5px 3px grey
-}
-
-.userText {
-    word-break: break-all
-}
-
-.textandname {
-    max-width: 90%
-}
-
-.rightmessage .userName {
-    background-color: lightskyblue;
-    padding-left: 6px
-}
-
-
-
-.inputs {
-    position: fixed;
-    bottom: 50px;
-    right: 10px
-}
-
-#posts {
-    position: fixed;
-    top: 200px;
-    bottom: 100px;
-    width: 100%;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-}
 
 a {
     margin-left: 8px
@@ -171,6 +111,73 @@ p {
         padding: 0;
         height: 100vh;
     }
+
+    #posts {
+        position: fixed;
+        top: 200px;
+        bottom: 100px;
+        width: 100%;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .inputs {
+        position: fixed;
+        bottom: 50px;
+        right: 10px
+    }
+    .leftmessage {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        margin: 5px;
+        margin-bottom: 7px
+    }
+
+
+
+    .rightmessage {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin: 5px;
+        margin-bottom: 7px
+    }
+
+    .rightmessage .textandname {
+        display: inline-block;
+        background-color: deepskyblue;
+        padding: 5px;
+        border-radius: 8px;
+        box-shadow: 5px 5px 3px grey
+    }
+
+    .leftmessage .textandname {
+        display: inline-block;
+        background-color: orange;
+        padding: 5px;
+        border-radius: 8px;
+        box-shadow: 5px 5px 3px grey
+    }
+
+    .userText {
+        word-break: break-all
+    }
+
+    .textandname {
+        max-width: 90%
+    }
+
+    .rightmessage .userName {
+        background-color: lightskyblue;
+        padding-left: 6px
+    }
+
+
+
+
+
 
     .logoButton {
         background-color: #4CAF50;
@@ -345,6 +352,85 @@ p {
 
     }
 
+    #posts {
+        background-color: white;
+        position: fixed;
+        top: 10px;
+        bottom: 60px;
+        width: 70%;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .inputs {
+        position: fixed;
+        bottom: 10px;
+        right: 10px
+    }
+
+    .leftmessage {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        margin: 5px;
+        margin-bottom: 7px
+    }
+    
+        .advice {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 30px;
+        height: 90%;
+            background-color: white;
+            margin: 5px
+    }
+
+
+
+    .rightmessage {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin: 5px;
+        margin-bottom: 7px
+    }
+
+    .rightmessage .textandname {
+        display: inline-block;
+        background-color: deepskyblue;
+        padding: 5px;
+        border-radius: 8px;
+        box-shadow: 5px 5px 3px grey
+    }
+
+    .leftmessage .textandname {
+        display: inline-block;
+        background-color: orange;
+        padding: 5px;
+        border-radius: 8px;
+        box-shadow: 5px 5px 3px grey
+    }
+
+    .userText {
+        word-break: break-all
+    }
+
+    .textandname {
+        max-width: 90%
+    }
+
+    .rightmessage .userName {
+        background-color: lightskyblue;
+        padding-left: 6px
+    }
+
+
+
+
+
+
     .logoButton {
         background-color: #4CAF50;
         border: 1px solid black;
@@ -461,7 +547,7 @@ p {
         position: fixed;
         top: 80px;
         bottom: 5px;
-
+        background-color: white
     }
 
 

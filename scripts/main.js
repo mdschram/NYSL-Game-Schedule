@@ -5,22 +5,26 @@ var main = new Vue({
         showPage: "games",
         locations: [],
         showLocation: "",
-        showTeam: "",
+        showTeam: "general",
         teams: [],
         selectedData: {
             "games": []
         },
-        visitedPages: ["games"],
+        visitedPages: ["games", "general"],
         address: "",
         url: "",
         gamesButton: true,
         teamsButton: false,
         stadiumsButton: false,
         accessStatus: "Log in",
-        messages: {}
+        messages: {},
+        currentTeamChat: [],
+        userName: "",
+        posts: [],
     },
     created: function () {
         this.fetch();
+//        this.messages = {}
 
     },
     methods: {
@@ -36,6 +40,8 @@ var main = new Vue({
                 })
         },
         pageToggler: function (buttonName, direction) {
+            console.log(this.visitedPages)
+        
             if (this.showPage == 'chatroom') {
                 posts.innerHTML = ""
             };
@@ -50,7 +56,7 @@ var main = new Vue({
                 this.showPage = "location";
                 this.showLocation = buttonName;
                 if (direction == "forward") {
-                    this.visitedPages.push(this.showLocation)
+                    this.visitedPages.push(this.showLocation, this.showTeam)
                 }
                 for (i = 0; i < this.gameData.games.length; i++) {
                     if (this.gameData.games[i].location == this.showLocation) {
@@ -73,7 +79,7 @@ var main = new Vue({
                 this.showPage = "team";
                 this.showTeam = buttonName;
                 if (direction == 'forward') {
-                    this.visitedPages.push(this.showTeam)
+                    this.visitedPages.push(this.showPage, this.showTeam)
                 }
                 for (i = 0; i < this.gameData.games.length; i++) {
                     if (this.gameData.games[i].team1 == this.showTeam || this.gameData.games[i].team2 == this.showTeam) {
@@ -81,16 +87,22 @@ var main = new Vue({
                     }
                 };
             } else if (buttonName == "back") {
-                if (this.visitedPages.length > 1) {
+                if (this.visitedPages.length > 2) {
                     this.visitedPages.pop();
-                    buttonName = this.visitedPages[this.visitedPages.length - 1]
+                    this.visitedPages.pop();
+                    buttonName = this.visitedPages[this.visitedPages.length - 2]
+                    this.showTeam = this.visitedPages[this.visitedPages.length - 1]
+                    
+                    
                     this.pageToggler(buttonName, 'backward')
                 }
             } else {
                 this.selectedData = this.gameData;
-                this.showPage = buttonName;
+                if (buttonName !== 'Log out' || buttonName !== "general"){
+                this.showPage = buttonName;}
                 if (direction == 'forward') {
-                    this.visitedPages.push(buttonName)
+                    this.visitedPages.push(buttonName,this.showTeam)
+
                 }
                 if (this.showPage == "locations") {
                     this.stadiumsButton = true
@@ -102,10 +114,16 @@ var main = new Vue({
                     this.teamsButton = true
                 }
 
-                if (this.showPage == "Log out") {
+                if (this.showPage == "chatroom") {
+                    this.getPosts(this.showTeam)
+                }
+                if (buttonName == "Log out") {
                     this.logout()
+                    
                 }
             }
+                    console.log("team",this.showTeam)
+            console.log("page",this.showPage)
         },
         locationArray: function () {
             for (i = 0; i < this.gameData.games.length; i++) {
@@ -129,41 +147,35 @@ var main = new Vue({
             this.showPage = "Create Account";
             var email = document.getElementById("email").value
             var password = document.getElementById("password").value
-            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // ...
+            firebase.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
+                var user = firebase.auth().currentUser;
+                user.updateProfile({
+                    displayName: document.getElementById("name").value
                 })
-                .then(function (user) {
-                    var user = firebase.auth().currentUser;
-                    user.updateProfile({
-                        displayName: document.getElementById("name").value
-                    });
-                }).catch(function (error) {
-                    console.log(error);
-                })
-            this.getPosts()
+                main.accessStatus = "Log out"
+                main.pageToggler('chatroom', 'forward')
+                main.userName = firebase.auth().currentUser.displayName;;
+            }).catch(function (error) {
+                console.log(error);
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(errorMessage)
+            })
         },
         login: function () {
             var email = document.getElementById("email").value
             var password = document.getElementById("password").value
-            firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    if (errorCode === 'auth/wrong-password') {
-                        alert('Wrong password.');
-                    } else {
-                        alert(errorMessage);
-                    }
-                    console.log(error);
-                })
-                .then(function () {
+            firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
                     console.log(firebase.Promise)
                     main.accessStatus = "Log out"
-                    main.showPage = 'chatroom';
-                    main.getPosts()
+                    main.pageToggler('chatroom', 'forward')
+                main.showTeam = "general"
+                    main.userName = firebase.auth().currentUser.displayName;
+                })
+                .catch(function (error) {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert(errorMessage)
                 })
 
         },
@@ -175,64 +187,92 @@ var main = new Vue({
             var provider = new firebase.auth.GoogleAuthProvider();
 
             // How to Log In
-            firebase.auth().signInWithPopup(provider)
-            //            this.accessStatus = "Log out"
-            this.showPage = 'chatroom'
+            firebase.auth().signInWithPopup(provider).then(function () {
+                main.userName = firebase.auth().currentUser.displayName;
+                main.pageToggler('chatroom', 'forward')
+                main.showTeam = "general"
+            })
             this.accessStatus = "Log out"
 
-            this.getPosts()
         },
         logout: function () {
             firebase.auth().signOut().then(function () {
-                // Sign-out successful.
+
+            main.accessStatus = "Log in";
+            main.showTeam = "general"
+
+                
             }).catch(function (error) {
                 // An error happened.
             })
-            this.showPage = "Log in"
-            this.accessStatus = "Log in"
+            
         },
-        writeNewPost: function () {
-
+        writeNewPost: function (team) {
             // https://firebase.google.com/docs/database/web/read-and-write
-
             // Values
             var text = document.getElementById("textInput").value;
             var userName = firebase.auth().currentUser.displayName;
-
-
             // A post entry
-
             var post = {
                 name: userName,
                 body: text
             };
 
             // Get a key for a new Post.
-            var newPostKey = firebase.database().ref().child('NYSLchatroom').push().key;
+            var newPostKey = firebase.database().ref().child('NYSLchatroom/' + team).push().key;
 
             //Write data
             var updates = {};
-            updates[newPostKey] = post;
+            updates['NYSLchatroom/' + team + '/' + newPostKey] = post;
             document.getElementById("textInput").value = ""
-            return firebase.database().ref('NYSLchatroom').update(updates);
+            return firebase.database().ref().update(updates);
         },
-        getPosts: function () {
-            firebase.database().ref('NYSLchatroom').on('value', function (data) {
-                main.messages = data.val();
+        getPosts: function (team) {
+            firebase.database().ref('NYSLchatroom/'+team).on('value', function (data) {
+                const posts= data.val();
+                let array = []
+                for (let key in posts) {
 
+                    var det = main.determineUser(posts[key].name);
+                    var diver = document.createElement('div');
+                    var div = document.createElement('div');
+                    var name = document.createElement('div');
+                    var text = document.createElement('div');
+                    
+                    div.append(name)
+                    div.append(text)
+                    diver.append(div)
+                    document.getElementById('posts').append(diver);
+                    name.classList.add('name')
+                    text.classList.add('userText')
+                    div.classList.add('textandname')
+                    diver.classList.add(det)
+                    diver.classList.add("message")
+                    name.innerHTML = posts[key].name;
+                    text.innerHTML = posts[key].body;
+                    var chatbox = document.getElementById("posts");
+            chatbox.scrollTop = chatbox.scrollHeight;
+                }
+ 
             })
-            console.log("getting posts");
-            var posts = document.getElementById("posts");
-            posts.scrollTop = posts.scrollHeight;
         },
         determineUser: function (messageName) {
-            var userName = firebase.auth().currentUser.displayName;
-            if (userName == messageName) {
+            if (this.userName == messageName) {
                 return "rightmessage"
             } else {
                 return "leftmessage"
             }
-
-        }
+        },
+        scrollDown: function () {
+            var posts = document.getElementById("posts");
+            posts.scrollTop = posts.scrollHeight;
+        },
+    },
+    mounted() {
+        this.scrollDown()
+    },
+    updated() {
+        this.scrollDown()
     }
+
 })
